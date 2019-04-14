@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  hausl_bot:
+    container_name: hausl_bot
+    build:
+      context: ./
+      dockerfile: Dockerfile_armv7l
+#    ports:
+#      - "4840:4840"
+#    volumes:
+#      - $VOLUME_DIR/irk:/usr/src/app/conf
+    restart: always
+#    environment:
+#      - DATABASE_USER
+#      - DATABASE_PASSWORD
+#      - DATABASE_PORT
+#      - DATABASE_HOSTNAME
+#      - DATABASE_NAME
+#      - DATABASE_DIALECT
+#      - DEBUG_MODE
