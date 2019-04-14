@@ -154,3 +154,4 @@ venv.bak/
 
 # my stuff
 .idea
+.tmp
