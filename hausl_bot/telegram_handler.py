@@ -1,7 +1,7 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-from __init__ import bot_token
+from __init__ import bot_token, valid_users
 
 from hausl_bot.house_status import HouseStatus
 from hausl_bot.warn_wetter_fetcher import WarnWetterFetcher
@@ -38,21 +38,34 @@ class TelegramHandler:
         updater.idle()
 
     def __help(self, update, context):
-        help_msg = '/help - Zeigt die Hilfe an.\r\n'
-        help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
-        help_msg = help_msg + '/whosAtHome - Zeigt an welche Geräte im WLAN angemeldet sind.\r\n'
-        update.message.reply_text(help_msg)
+        if self.__validate_user(update):
+            help_msg = '/help - Zeigt die Hilfe an.\r\n'
+            help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
+            help_msg = help_msg + '/whosAtHome - Zeigt an welche Geräte im WLAN angemeldet sind.\r\n'
+
+            update.message.reply_text(help_msg)
 
     def __weather_warnings(self, update, context):
-        update.message.reply_text(WarnWetterFetcher.get_warnings())
+        if self.__validate_user(update):
+            update.message.reply_text(WarnWetterFetcher.get_warnings())
 
     def __whos_at_home(self, update, context):
-        update.message.reply_text(HouseStatus.get_house_status())
+        if self.__validate_user(update):
+            update.message.reply_text(HouseStatus.get_house_status())
 
     def __echo(self, update, context):
         """Echo the user message."""
-        update.message.reply_text(update.message.text)
+        if self.__validate_user(update):
+            update.message.reply_text(update.message.text)
 
     def __error(self, update, context):
         """Log Errors caused by Updates."""
-        logging.warning('Update "%s" caused error "%s"', update, context.error)
+        if self.__validate_user(update):
+            logging.warning('Update "%s" caused error "%s"', update, context.error)
+
+    def __validate_user(self, update):
+        if update.effective_user.username in valid_users:
+            return True
+        else:
+            update.message.reply_text('Du bist kein authorisierter Benutzer!')
+            return False

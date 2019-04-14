@@ -11,3 +11,4 @@ if not os.getenv('RUNNING_INSIDE_DOCKER', False):
 bot_token = os.environ['BOT_TOKEN']
 warn_cell_id = os.environ['WARN_CELL_ID']
 monitored_devices = os.environ['MONITORED_DEVICES'].split(',')
+valid_users = os.environ['VALID_USERS'].split(',')
