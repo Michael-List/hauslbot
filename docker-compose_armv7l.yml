@@ -11,7 +11,9 @@ services:
 #    volumes:
 #      - $VOLUME_DIR/irk:/usr/src/app/conf
     restart: always
-#    environment:
+    environment:
+      - BOT_TOKEN
+      - WARN_CELL_ID
 #      - DATABASE_USER
 #      - DATABASE_PASSWORD
 #      - DATABASE_PORT
