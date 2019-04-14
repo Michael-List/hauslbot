@@ -3,6 +3,8 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 from __init__ import bot_token
 
+from hausl_bot.warn_wetter_fetcher import WarnWetterFetcher
+
 
 class TelegramHandler:
     def __init__(self):
@@ -18,6 +20,7 @@ class TelegramHandler:
         # on different commands - answer in Telegram
         dp.add_handler(CommandHandler("start", self.__start))
         dp.add_handler(CommandHandler("help", self.__help))
+        dp.add_handler(CommandHandler("weatherWarnings", self.__weather_warnings))
 
         # on noncommand i.e message - echo the message on Telegram
         dp.add_handler(MessageHandler(Filters.text, self.__echo))
@@ -34,8 +37,12 @@ class TelegramHandler:
         updater.idle()
 
     def __help(self, update, context):
-        """Send a message when the command /help is issued."""
-        update.message.reply_text('Help!')
+        help_msg = '/help - Zeigt die Hilfe an.\r\n'
+        help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
+        update.message.reply_text(help_msg)
+
+    def __weather_warnings(self, update, context):
+        update.message.reply_text(WarnWetterFetcher.get_warnings())
 
     def __start(self, update, context):
         """Send a message when the command /start is issued."""
