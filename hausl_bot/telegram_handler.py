@@ -22,6 +22,7 @@ class TelegramHandler:
         dp.add_handler(CommandHandler("help", self.__help))
         dp.add_handler(CommandHandler("weatherWarnings", self.__weather_warnings))
         dp.add_handler(CommandHandler("whosAtHome", self.__whos_at_home))
+        dp.add_handler(CommandHandler("startWashing", self.__start_washing()))
 
         # on noncommand i.e message - echo the message on Telegram
         dp.add_handler(MessageHandler(Filters.text, self.__echo))
@@ -42,6 +43,7 @@ class TelegramHandler:
             help_msg = '/help - Zeigt die Hilfe an.\r\n'
             help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
             help_msg = help_msg + '/whosAtHome - Zeigt an welche Geräte im WLAN angemeldet sind.\r\n'
+            help_msg = help_msg + '/startWashing - Wenn die Waschmaschine fertig ist wird man benachrichtigt.\r\n'
 
             update.message.reply_text(help_msg)
 
@@ -52,6 +54,10 @@ class TelegramHandler:
     def __whos_at_home(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text(HouseStatus.get_house_status())
+
+    def __start_washing(self, update, context):
+        if self.__validate_user(update):
+            update.message.reply_text('Noch keine Funktion hinterlegt')
 
     def __echo(self, update, context):
         """Echo the user message."""
