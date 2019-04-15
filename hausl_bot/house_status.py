@@ -12,7 +12,7 @@ class HouseStatus:
             ip_address, name = device.split('=')
 
             # Get online devices
-            response = os.system("ping -4 -c 1 -w4 " + ip_address + " > /dev/null 2>&1")
+            response = os.system('ping -4 -c 1 -w4 ' + ip_address + ' > /dev/null 2>&1')
             if response == 0:
                 ret_msg = ret_msg + name + ' ist erreichbar.\r\n'
             else:

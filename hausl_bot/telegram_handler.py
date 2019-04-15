@@ -19,10 +19,10 @@ class TelegramHandler:
         dp = updater.dispatcher
 
         # on different commands - answer in Telegram
-        dp.add_handler(CommandHandler("help", self.__help))
-        dp.add_handler(CommandHandler("weatherWarnings", self.__weather_warnings))
-        dp.add_handler(CommandHandler("whosAtHome", self.__whos_at_home))
-        dp.add_handler(CommandHandler("startWashing", self.__start_washing()))
+        dp.add_handler(CommandHandler('help', self.__help))
+        dp.add_handler(CommandHandler('weatherWarnings', self.__weather_warnings))
+        dp.add_handler(CommandHandler('whosAtHome', self.__whos_at_home))
+        dp.add_handler(CommandHandler('startWashing', self.__start_washing))
 
         # on noncommand i.e message - echo the message on Telegram
         dp.add_handler(MessageHandler(Filters.text, self.__echo))
