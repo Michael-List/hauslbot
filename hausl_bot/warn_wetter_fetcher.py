@@ -10,6 +10,10 @@ class WarnWetterFetcher:
     def get_warnings():
         warning_msg = 'Derzeit liegen keine Warnungen vor.'
         r = requests.get('http://www.wettergefahren.de/DWD/warnungen/warnapp/warnings.json')
+
+        if r.status_code != 200:
+            return 'Warnungen konnten nicht abgerufen werden. Status: ' + r.status_code
+
         content = r.text.replace('warnWetter.loadWarnings(', '')
         content = content.replace(');', '')
 
