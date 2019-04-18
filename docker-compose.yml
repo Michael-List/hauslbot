@@ -5,7 +5,7 @@ services:
     container_name: hausl_bot
     build:
       context: ./
-      dockerfile: Dockerfile_armv7l
+      dockerfile: Dockerfile
     restart: always
     environment:
       - BOT_TOKEN
