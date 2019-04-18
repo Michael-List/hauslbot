@@ -46,6 +46,8 @@ class TelegramHandler:
             help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
             help_msg = help_msg + '/whosAtHome - Zeigt an welche Geräte im WLAN angemeldet sind.\r\n'
             help_msg = help_msg + '/startWashing - Wenn die Waschmaschine fertig ist wird man benachrichtigt.\r\n'
+            help_msg = help_msg + '/whatsMyHomesIP - Gibt die öffentliche IP-Adresse zurück hinter der der Telegram ' \
+                                  'Bot läuft.\r\n '
 
             update.message.reply_text(help_msg)
 
