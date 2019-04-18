@@ -4,6 +4,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from __init__ import bot_token, valid_users
 
 from hausl_bot.house_status import HouseStatus
+from hausl_bot.my_ip_fetcher import MyIPFetcher
 from hausl_bot.warn_wetter_fetcher import WarnWetterFetcher
 
 
@@ -23,6 +24,7 @@ class TelegramHandler:
         dp.add_handler(CommandHandler('weatherWarnings', self.__weather_warnings))
         dp.add_handler(CommandHandler('whosAtHome', self.__whos_at_home))
         dp.add_handler(CommandHandler('startWashing', self.__start_washing))
+        dp.add_handler(CommandHandler('whatsMyHomesIP', self.__whats_my_homes_ip))
 
         # on noncommand i.e message - echo the message on Telegram
         dp.add_handler(MessageHandler(Filters.text, self.__echo))
@@ -58,6 +60,10 @@ class TelegramHandler:
     def __start_washing(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text('Noch keine Funktion hinterlegt')
+
+    def __whats_my_homes_ip(self, update, context):
+        if self.__validate_user(update):
+            update.message.reply_text(MyIPFetcher.fetch_ip())
 
     def __echo(self, update, context):
         """Echo the user message."""
