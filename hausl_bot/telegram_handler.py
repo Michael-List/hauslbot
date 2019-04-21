@@ -39,12 +39,11 @@ class TelegramHandler:
 
     def __help(self, update, context):
         if self.__validate_user(update):
-            help_msg = '/help - Zeigt die Hilfe an.\r\n'
-            help_msg = help_msg + '/weatherWarnings - Zeigt Wetterwarnungen für die konfigurierte Region an.\r\n'
-            help_msg = help_msg + '/whosAtHome - Zeigt an welche Geräte im WLAN angemeldet sind.\r\n'
-            help_msg = help_msg + '/startWashing - Wenn die Waschmaschine fertig ist wird man benachrichtigt.\r\n'
-            help_msg = help_msg + '/whatsMyHomesIP - Gibt die öffentliche IP-Adresse zurück hinter der der Telegram ' \
-                                  'Bot läuft.\r\n '
+            help_msg = '/help - Shows this help.\r\n'
+            help_msg = help_msg + '/weatherWarnings - Shows weather warnings for the configured region.\r\n'
+            help_msg = help_msg + '/whosAtHome - Shows connected devices to the WLAN.\r\n'
+            help_msg = help_msg + '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
+            help_msg = help_msg + '/whatsMyHomesIP - Sends you the public ip of your home.\r\n '
 
             update.message.reply_text(help_msg)
 
@@ -58,7 +57,7 @@ class TelegramHandler:
 
     def __start_washing(self, update, context):
         if self.__validate_user(update):
-            update.message.reply_text('Noch keine Funktion hinterlegt')
+            update.message.reply_text('No function added.')
 
     def __whats_my_homes_ip(self, update, context):
         if self.__validate_user(update):
@@ -73,5 +72,5 @@ class TelegramHandler:
         if update.effective_user.username in valid_users:
             return True
         else:
-            update.message.reply_text('Du bist kein authorisierter Benutzer!')
+            update.message.reply_text('Your user is not authorized!')
             return False
