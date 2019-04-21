@@ -26,9 +26,6 @@ class TelegramHandler:
         dp.add_handler(CommandHandler('startWashing', self.__start_washing))
         dp.add_handler(CommandHandler('whatsMyHomesIP', self.__whats_my_homes_ip))
 
-        # on noncommand i.e message - echo the message on Telegram
-        dp.add_handler(MessageHandler(Filters.text, self.__echo))
-
         # log all errors
         dp.add_error_handler(self.__error)
 
@@ -66,11 +63,6 @@ class TelegramHandler:
     def __whats_my_homes_ip(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text(MyIPFetcher.fetch_ip())
-
-    def __echo(self, update, context):
-        """Echo the user message."""
-        if self.__validate_user(update):
-            update.message.reply_text(update.message.text)
 
     def __error(self, update, context):
         """Log Errors caused by Updates."""
