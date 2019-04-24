@@ -1,6 +1,7 @@
 import os
 
 from __init__ import monitored_devices
+from uptime import uptime
 
 
 class HouseStatus:
@@ -22,4 +23,4 @@ class HouseStatus:
 
     @staticmethod
     def get_system_uptime():
-        return os.system('uptime -p')
+        return uptime
