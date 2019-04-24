@@ -25,6 +25,7 @@ class TelegramHandler:
         dp.add_handler(CommandHandler('whosAtHome', self.__whos_at_home))
         dp.add_handler(CommandHandler('startWashing', self.__start_washing))
         dp.add_handler(CommandHandler('whatsMyHomesIP', self.__whats_my_homes_ip))
+        dp.add_handler(CommandHandler('getSystemUptime', self.__get_system_uptime))
 
         # log all errors
         dp.add_error_handler(self.__error)
@@ -44,6 +45,7 @@ class TelegramHandler:
             help_msg = help_msg + '/whosAtHome - Shows connected devices to the WLAN.\r\n'
             help_msg = help_msg + '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
             help_msg = help_msg + '/whatsMyHomesIP - Sends you the public ip of your home.\r\n '
+            help_msg = help_msg + '/getSystemUptime - Sends you the uptime of the system.\r\n '
 
             update.message.reply_text(help_msg)
 
@@ -62,6 +64,10 @@ class TelegramHandler:
     def __whats_my_homes_ip(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text(MyIPFetcher.fetch_ip())
+
+    def __get_system_uptime(self, update, context):
+        if self.__validate_user(update):
+            update.message.reply_text(HouseStatus.get_system_uptime())
 
     def __error(self, update, context):
         """Log Errors caused by Updates."""

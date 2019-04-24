@@ -19,3 +19,7 @@ class HouseStatus:
                 ret_msg = ret_msg + name + ' is not connected.\r\n'
 
         return ret_msg
+
+    @staticmethod
+    def get_system_uptime():
+        return os.system('uptime -p')
