@@ -6,6 +6,7 @@ from __init__ import bot_token, valid_users
 from hausl_bot.house_status import HouseStatus
 from hausl_bot.my_ip_fetcher import MyIPFetcher
 from hausl_bot.warn_wetter_fetcher import WarnWetterFetcher
+from hausl_bot.weather_data_fetcher import WeatherDataFetcher
 
 
 class TelegramHandler:
@@ -22,6 +23,7 @@ class TelegramHandler:
         # on different commands - answer in Telegram
         dp.add_handler(CommandHandler('help', self.__help))
         dp.add_handler(CommandHandler('weatherWarnings', self.__weather_warnings))
+        dp.add_handler(CommandHandler('weatherStationValues', self.__weather_station_values))
         dp.add_handler(CommandHandler('whosAtHome', self.__whos_at_home))
         dp.add_handler(CommandHandler('startWashing', self.__start_washing))
         dp.add_handler(CommandHandler('whatsMyBotsIP', self.__whats_my_bots_ip))
@@ -42,6 +44,7 @@ class TelegramHandler:
         if self.__validate_user(update):
             help_msg = '/help - Shows this help.\r\n'
             help_msg = help_msg + '/weatherWarnings - Shows weather warnings for the configured region.\r\n'
+            help_msg = help_msg + '/weatherStationValues - Shows the values from my weatherstation.\r\n'
             help_msg = help_msg + '/whosAtHome - Shows connected devices to the WLAN.\r\n'
             help_msg = help_msg + '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
             help_msg = help_msg + '/whatsMyBotsIP - Sends you the public ip of the host the bot is running on.\r\n '
@@ -52,6 +55,10 @@ class TelegramHandler:
     def __weather_warnings(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text(WarnWetterFetcher.get_warnings())
+
+    def __weather_station_values(self, update, context):
+        if self.__validate_user(update):
+            update.message.reply_text(WeatherDataFetcher.get_current_data())
 
     def __whos_at_home(self, update, context):
         if self.__validate_user(update):
