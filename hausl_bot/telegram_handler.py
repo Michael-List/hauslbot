@@ -24,7 +24,7 @@ class TelegramHandler:
         dp.add_handler(CommandHandler('weatherWarnings', self.__weather_warnings))
         dp.add_handler(CommandHandler('whosAtHome', self.__whos_at_home))
         dp.add_handler(CommandHandler('startWashing', self.__start_washing))
-        dp.add_handler(CommandHandler('whatsMyHomesIP', self.__whats_my_homes_ip))
+        dp.add_handler(CommandHandler('whatsMyBotsIP', self.__whats_my_bots_ip))
         dp.add_handler(CommandHandler('getSystemUptime', self.__get_system_uptime))
 
         # log all errors
@@ -44,7 +44,7 @@ class TelegramHandler:
             help_msg = help_msg + '/weatherWarnings - Shows weather warnings for the configured region.\r\n'
             help_msg = help_msg + '/whosAtHome - Shows connected devices to the WLAN.\r\n'
             help_msg = help_msg + '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
-            help_msg = help_msg + '/whatsMyHomesIP - Sends you the public ip of your home.\r\n '
+            help_msg = help_msg + '/whatsMyBotsIP - Sends you the public ip of the host the bot is running on.\r\n '
             help_msg = help_msg + '/getSystemUptime - Sends you the uptime of the system.\r\n '
 
             update.message.reply_text(help_msg)
@@ -61,7 +61,7 @@ class TelegramHandler:
         if self.__validate_user(update):
             update.message.reply_text('No function added.')
 
-    def __whats_my_homes_ip(self, update, context):
+    def __whats_my_bots_ip(self, update, context):
         if self.__validate_user(update):
             update.message.reply_text(MyIPFetcher.fetch_ip())
 
