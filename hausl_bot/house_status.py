@@ -1,7 +1,11 @@
 import os
+from datetime import datetime, timedelta
+from pytz import timezone
 
 from __init__ import monitored_devices
 from uptime import uptime
+
+OUT_TS_FORMAT = '%d.%m.%Y, %H:%M:%S'
 
 
 class HouseStatus:
@@ -23,4 +27,10 @@ class HouseStatus:
 
     @staticmethod
     def get_system_uptime():
-        return uptime
+        uptime_in_sec = uptime()
+
+        if uptime is None:
+            return 'Could not get uptime!'
+        else:
+            timestamp = datetime.now() - timedelta(seconds=uptime_in_sec)
+            return timestamp.astimezone(timezone('Europe/Berlin')).strftime(OUT_TS_FORMAT)

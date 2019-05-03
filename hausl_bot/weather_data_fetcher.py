@@ -6,7 +6,7 @@ import requests
 from __init__ import influxdb_server_name, influxdb_name, ws_station_number
 
 IN_TS_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
-OUT_TS_FORMAT = '%m.%d.%Y, %H:%M:%S'
+OUT_TS_FORMAT = '%d.%m.%Y, %H:%M:%S'
 
 
 class WeatherDataFetcher:
