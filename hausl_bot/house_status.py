@@ -19,9 +19,9 @@ class HouseStatus:
             # Get online devices
             response = os.system('ping -4 -c 1 -w4 ' + ip_address + ' > /dev/null 2>&1')
             if response == 0:
-                ret_msg = ret_msg + name + ' is conected.\r\n'
+                ret_msg += name + ' is conected.\r\n'
             else:
-                ret_msg = ret_msg + name + ' is not connected.\r\n'
+                ret_msg += name + ' is not connected.\r\n'
 
         return ret_msg
 

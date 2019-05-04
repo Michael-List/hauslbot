@@ -24,10 +24,10 @@ class WarnWetterFetcher:
             warning_msg = ''
             for warning in area_warnings:
                 warning_msg = warning['regionName'] + '\r\n'
-                warning_msg = warning_msg + 'Start: ' + datetime.fromtimestamp(int(warning['start']) / 1000).strftime(
+                warning_msg += 'Start: ' + datetime.fromtimestamp(int(warning['start']) / 1000).strftime(
                     '%H:%M:%S %d-%m-%Y') + '\r\n'
-                warning_msg = warning_msg + 'End: ' + datetime.fromtimestamp(int(warning['end']) / 1000).strftime(
+                warning_msg += 'End: ' + datetime.fromtimestamp(int(warning['end']) / 1000).strftime(
                     '%H:%M:%S %d-%m-%Y') + '\r\n'
-                warning_msg = warning_msg + 'Warning: ' + warning['description'] + '\r\n\r\n'
+                warning_msg += 'Warning: ' + warning['description'] + '\r\n\r\n'
 
         return warning_msg

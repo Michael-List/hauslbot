@@ -43,12 +43,12 @@ class TelegramHandler:
     def __help(self, update, context):
         if self.__validate_user(update):
             help_msg = '/help - Shows this help.\r\n'
-            help_msg = help_msg + '/weatherWarnings - Shows weather warnings for the configured region.\r\n'
-            help_msg = help_msg + '/weatherStationValues - Shows the values from my weatherstation.\r\n'
-            help_msg = help_msg + '/whosAtHome - Shows connected devices to the WLAN.\r\n'
-            help_msg = help_msg + '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
-            help_msg = help_msg + '/whatsMyBotsIP - Sends you the public ip of the host the bot is running on.\r\n '
-            help_msg = help_msg + '/getSystemUptime - Sends you the uptime of the system.\r\n '
+            help_msg += '/weatherWarnings - Shows weather warnings for the configured region.\r\n'
+            help_msg += '/weatherStationValues - Shows the values from my weatherstation.\r\n'
+            help_msg += '/whosAtHome - Shows connected devices to the WLAN.\r\n'
+            help_msg += '/startWashing - Sends you a notification if the washing machine has finished.\r\n'
+            help_msg += '/whatsMyBotsIP - Sends you the public ip of the host the bot is running on.\r\n '
+            help_msg += '/getSystemUptime - Sends you the uptime of the system.\r\n '
 
             update.message.reply_text(help_msg)
 
